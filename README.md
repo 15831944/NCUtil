@@ -6,13 +6,14 @@
 1. MFC相关类库
 2. OpenGL库
 3. glm库
+
 ---
 
 ## 开始使用
 
 > OpenGL固定管线
 
-1. 继承自BaseCompatGL。
+1 继承自BaseCompatGL。
 
 ```C++
 public class MyGL : public BaseCompatGL{
@@ -20,7 +21,7 @@ public class MyGL : public BaseCompatGL{
 }
 ```
 
-2. 重写 *void draw(void)* 方法。
+2 重写 *void draw(void)* 方法。
 
 ```C++
 public class MyGL : public BaseCompatGL{
@@ -33,7 +34,7 @@ public class MyGL : public BaseCompatGL{
 }
 ```
 
-3. 在MFC的CView类创建子类对象，在OnCreate中创建环境，在OnDestroy中删除环境
+3 在MFC的CView类创建子类对象，在OnCreate中创建环境，在OnDestroy中删除环境
 
 ```C++
 	int CView::OnCreate(...){
@@ -50,7 +51,7 @@ public class MyGL : public BaseCompatGL{
 	}
 ```
 
-4. 在CView类需要的地方调用draw()方法。
+4 在CView类需要的地方调用draw()方法。
 ```C++
 	m_myGL.draw();
 ```
