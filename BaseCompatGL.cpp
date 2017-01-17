@@ -6,8 +6,13 @@
 
 
 BaseCompatGL::BaseCompatGL(void){
+	//默认的背景颜色
 	m_backgroundColorTop = glm::vec3(0.0f,0.0f,0.0f);
 	m_backgroundColorBottom = glm::vec3(0.0f,0.0f,0.0f);
+	//默认的视图交互设置
+	m_view.setViewport(0,0,800,600);
+	m_view.setOrtho(-1.0f, 1.0f, -1.0f, 1.0f, 0.1f,10000.0f);
+	m_view.setLookAt(2000.0f, 25.0f, 25.0f);
 }
 BaseCompatGL::~BaseCompatGL(void){
 
@@ -94,6 +99,13 @@ CClientDC* BaseCompatGL::getClientDC(void){
 }
 
 /*
+*	获取视图交互类 View
+*/
+View& BaseCompatGL::getView(void){
+	return m_view;
+}
+
+/*
 *	设置全背景色
 */
 void BaseCompatGL::setBackgroundColor(GLfloat red, GLfloat green, GLfloat blue){
@@ -130,12 +142,14 @@ void BaseCompatGL::drawBackground(void){
 		{1.0f, -1.0f, 1.0f},
 		{1.0f, 1.0f, 1.0f}
 	};
-
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
 	glDisable(GL_LIGHTING);
 	glDepthFunc(GL_LEQUAL);
+	glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
 	glBegin(GL_TRIANGLES);
 		glColor3fv( glm::value_ptr(m_backgroundColorBottom) );
 		glVertex3fv( vertices[0] );

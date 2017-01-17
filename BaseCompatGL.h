@@ -19,6 +19,8 @@
 #include <afxwin.h>
 #include <glm/glm.hpp>
 
+#include "View.h"
+
 class BaseCompatGL{
 
 public:
@@ -37,8 +39,10 @@ public:
 	BOOL createContext(CView* pView);
 	BOOL deleteContext(void);
 
-	/*	获取设备句柄进行绘制 */
+	// 获取设备句柄进行绘制
 	CClientDC* getClientDC(void);
+	// 获取视图交互类
+	View& getView(void);
 
 	//设置背景颜色
 	void setBackgroundColor(GLfloat red, GLfloat green, GLfloat blue);
@@ -53,9 +57,11 @@ public:
 	
 protected:
 
+	View m_view;
+
+
 	//绘制背景
 	void drawBackground(void);
-
 	//置换双缓存 SwapBuffers()
 	void show(void);
 

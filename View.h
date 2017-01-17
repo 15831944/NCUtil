@@ -20,21 +20,32 @@ public:
 	View(void);
 	~View(void);
 
-	//设置屏幕宽高比
+	// 设置屏幕宽高比
 	void setWindowRatio(GLfloat windowRatio);
+	// 设置屏幕窗口的显示
+	void setViewport(int xBegin, int yBegin, int width, int height);
 
-	//视图平移、旋转、缩放
+	// 设置 glOrtho的参数
+	void setOrtho(GLfloat fromX, GLfloat toX, GLfloat fromY, GLfloat toY, GLfloat fromZ, GLfloat toZ);
+	// 设置 gluLookAt的参数
+	void setLookAt(GLfloat radius, GLfloat hAngle, GLfloat vAngle);
+
+	// 视图平移、旋转、缩放
 	void translate(GLfloat dxRate, GLfloat dyRate);
 	void rotate(GLfloat dxRate, GLfloat dyRate);
 	void scale(CPoint pt, GLshort zDelta);
+	
+	// 点空间的转化，相当于glOrtho函数和gluLookAt函数 
+	void viewToProjection(void);
+	void modelToView(void);
 protected:
 
 private:
 	//常数
 	GLfloat PI;
 
-	GLfloat m_angleH;		//水平角度
-	GLfloat m_angleV;		//垂直角度
+	GLfloat m_hAngle;		//水平角度
+	GLfloat m_vAngle;		//垂直角度
 	GLfloat m_radius;		//视点距离，半径
 
 	glm::vec3 m_eye;		//眼睛的位置
@@ -43,6 +54,11 @@ private:
 
 	//屏幕窗口的宽高比 w/h
 	GLfloat m_windowRatio;
+	//视图窗口的位置和大小
+	GLint m_viewportXBegin;
+	GLint m_viewportYBegin;
+	GLint m_viewportWidth;
+	GLint m_viewportHeight;
 	//glOrtho函数的6个参数
 	GLfloat m_fromX;	
 	GLfloat m_toX;
