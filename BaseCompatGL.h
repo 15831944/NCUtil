@@ -20,6 +20,7 @@
 #include <glm/glm.hpp>
 
 #include "View.h"
+#include "ModelManager.h"
 
 class BaseCompatGL{
 
@@ -53,20 +54,22 @@ public:
 	void init(void);
 
 	// 绘制方法， 由子类具体实现
-	virtual void draw(void) = 0;
-	
+	void draw(void);
+	virtual void onDraw(void) = 0;
 protected:
 
+	//视图，管理模型的坐标变换
 	View m_view;
-
+	//模型管理容器
+	ModelManager modelManager;
 
 	//绘制背景
 	void drawBackground(void);
 	//置换双缓存 SwapBuffers()
 	void show(void);
 
-
 private:
+
 	//OpenGL绘制的视图窗口类
 	CView* m_pView;
 

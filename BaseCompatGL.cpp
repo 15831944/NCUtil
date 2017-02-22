@@ -4,8 +4,10 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "ObjectUtil.h"
 
 BaseCompatGL::BaseCompatGL(void){
+
 	//默认的背景颜色
 	m_backgroundColorTop = glm::vec3(0.0f,0.0f,0.0f);
 	m_backgroundColorBottom = glm::vec3(0.0f,0.0f,0.0f);
@@ -177,6 +179,7 @@ void BaseCompatGL::init(void){
 	glEnable(GL_DEPTH_TEST);
 	glClearDepth(1.0f);
 
+	ObjectUtil::getCanvas().initCharList(m_pDC->GetSafeHdc());
 	//初始化光照
 	initLighting();
 }
@@ -210,4 +213,15 @@ void BaseCompatGL::initLighting(void){
 	glEnable(GL_LIGHT0);
 	glEnable(GL_COLOR_MATERIAL);
 	glShadeModel(GL_SMOOTH);
+}
+
+/*
+*	主绘制函数
+*/
+void BaseCompatGL::draw(void){
+	drawBackground();
+	// 子类需具体实现
+	onDraw();
+
+	show();
 }

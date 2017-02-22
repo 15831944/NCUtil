@@ -13,12 +13,22 @@
 #define _VIEW_H_
 
 #include<glm/glm.hpp>
+#include<glm/gtc/matrix_transform.hpp>
+#include<glm/gtc/type_ptr.hpp>
 
 class View
 {
 public:
 	View(void);
 	~View(void);
+
+	GLfloat getFromX(void);
+	GLfloat getToX(void);
+	GLfloat getFromY(void);
+	GLfloat getToY(void);
+	GLfloat getFromZ(void);
+	GLfloat getToZ(void);
+
 
 	// 设置屏幕宽高比
 	void setWindowRatio(GLfloat windowRatio);
@@ -38,11 +48,16 @@ public:
 	// 点空间的转化，相当于glOrtho函数和gluLookAt函数 
 	void viewToProjection(void);
 	void modelToView(void);
+
+	void fitScale();
+	void fitScale(GLfloat yRange);
 protected:
 
 private:
 	//常数
 	GLfloat PI;
+	//一组开关变量
+	bool m_bLightPositionWithEye;	//光照的位置是否是眼睛的位置
 
 	GLfloat m_hAngle;		//水平角度
 	GLfloat m_vAngle;		//垂直角度
